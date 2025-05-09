@@ -1,0 +1,37 @@
+name: SimpleShop
+version: 2.0.0
+main: SShop\Main
+author: ArchDev2
+api: 5.0.0
+commands:
+  shop:
+    description: "Open the shop menu"
+    usage: "/shop"
+    permission: sshop.use
+  addshopitem:
+    description: "Add an item to the shop"
+    usage: "/addshopitem <category> <price> [description]"
+    permission: sshop.admin
+  removeshopitem:
+    description: "Remove an item from the shop"
+    usage: "/removeshopitem <category> <item>"
+    permission: sshop.admin
+  editshopprice:
+    description: "Edit an item's price"
+    usage: "/editshopprice <category> <item> <newprice>"
+    permission: sshop.admin
+  addshopcategory:
+    description: "Add a new shop category"
+    usage: "/addshopcategory <name>"
+    permission: sshop.admin
+  removeshopcategory:
+    description: "Remove a shop category"
+    usage: "/removeshopcategory <name>"
+    permission: sshop.admin
+permissions:
+  sshop.use:
+    description: "Allows player to open the shops"
+    default: true
+  sshop.admin:
+    description: "Allows managing shop items"
+    default: op
