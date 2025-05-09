@@ -1,5 +1,5 @@
 name: SimpleShop
-version: 2.0.0
+version: 2.0.1 - BETA
 main: SShop\Main
 author: ArchDev2
 api: 5.0.0
