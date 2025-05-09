@@ -3,6 +3,7 @@ version: 2.0.0
 main: SShop\Main
 author: ArchDev2
 api: 5.0.0
+depends: [pmforms, EconomyAPI]
 commands:
   shop:
     description: "Open the shop menu"
