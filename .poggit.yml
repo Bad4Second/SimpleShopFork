@@ -5,4 +5,9 @@ branches:
 projects:
   SimpleShop:
     path: ""
+    libs:
+      - src: Muqsit/InvMenu/InvMenu
+        version: ^4.6.5
+      - src: dktapps-pm-pl/pmforms/pmforms
+        version: ^2.1.0
 ...
