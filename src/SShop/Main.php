@@ -318,9 +318,9 @@ class Main extends PluginBase {
         }
     }
     
-    // Final fallback - use the item's vanilla name
-    return $item->getVanillaName() ?? "Unknown Item";
-}
+    $vanillaName = $item->getVanillaName();
+return !empty($vanillaName) ? $vanillaName : "Unknown Item";
+    }
 
     private function getItemFromName(string $name): ?Item {
     // First try with underscores
