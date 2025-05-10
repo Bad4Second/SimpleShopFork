@@ -51,7 +51,7 @@ class Main extends PluginBase {
                 
                 $category = $args[0];
                 $price = (float)$args[1];
-                $description = implode(" ", array_slice($args, 2)) ?? "No description";
+                $description = !empty(implode(" ", array_slice($args, 2))) ? implode(" ", array_slice($args, 2)) : "No description";
                 $item = $sender->getInventory()->getItemInHand();
                 
                 if($item->isNull()) {
