@@ -192,7 +192,7 @@ class Main extends PluginBase {
     public function openMainMenu(Player $player) {
         $options = [];
         foreach(array_keys($this->shops) as $category) {
-            $options[] = new MenuOption("§8" . $category);
+            $options[] = new MenuOption("§8" . $category, "textures/ui/icon_recipe_nature");
         }
 
         $form = new MenuForm(
@@ -219,9 +219,9 @@ class Main extends PluginBase {
         $options = [];
         foreach($this->shops[$category] as $itemName => $data) {
             $price = $data["price"];
-            $options[] = new MenuOption("§8" . $itemName . "\n§a$" . $price);
+            $options[] = new MenuOption("§8" . $itemName . "\n§a$" . $price, "textures/ui/icon_star");
         }
-        $options[] = new MenuOption("§cBack");
+        $options[] = new MenuOption("§cBack", "textures/ui/exit");
 
         $form = new MenuForm(
             "§l§6" . $category . " Shop",
