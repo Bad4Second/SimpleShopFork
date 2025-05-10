@@ -257,44 +257,44 @@ class Main extends PluginBase {
     }
 
     $form = new CustomForm(
-        "§l§6Purchase " . $item->getName(),
-        [
-            new Label("info", "§7Price: §a$" . $price . " each\n" .
-                             "§7Description: §f" . $description . "\n" .
-                             "§7Your balance: §a$" . $this->economyAPI->myMoney($player)),
-            new Slider("amount", "§7Amount", 1, 64, 1, 1)
-        ],
-        function(Player $player, \dktapps\pmforms\CustomFormResponse $response) use ($category, $itemName, $price, $item) : void {
-            $data = $response->getAll();
-            $amount = (int)$data["amount"];
-            
-            if($amount <= 0) {
-                $player->sendMessage("§cAmount must be positive!");
-                return;
-            }
-
-            $totalCost = $price * $amount;
-            $money = $this->economyAPI->myMoney($player);
-
-            if($money < $totalCost) {
-                $player->sendMessage("§cYou don't have enough money! You need $" . ($totalCost - $money) . " more.");
-                return;
-            }
-
-            $item->setCount($amount);
-            if(!$player->getInventory()->canAddItem($item)) {
-                $player->sendMessage("§cYour inventory is full!");
-                return;
-            }
-
-            $this->economyAPI->reduceMoney($player, $totalCost);
-            $player->getInventory()->addItem($item);
-            $player->sendMessage("§aPurchased " . $amount . " " . $item->getName() . " for $" . $totalCost . "!");
-        },
-        function(Player $player) use ($category) : void {
-            $this->openCategoryMenu($player, $category);
+    "§l§6Purchase " . $item->getName(),
+    [
+        new Label("info", "§7Price: §a$" . $price . " each\n" .
+                         "§7Description: §f" . $description . "\n" .
+                         "§7Your balance: §a$" . $this->economyAPI->myMoney($player)),
+        new Slider("amount", "§7Amount", 1, 64, 1, 1)
+    ],
+    function(Player $player, \dktapps\pmforms\CustomFormResponse $response) use ($price, $item) : void {
+        $data = $response->getAll();
+        $amount = (int)$data["amount"];
+        
+        if($amount <= 0) {
+            $player->sendMessage("§cAmount must be positive!");
+            return;
         }
-    );
+
+        $totalCost = $price * $amount;
+        $money = $this->economyAPI->myMoney($player);
+
+        if($money < $totalCost) {
+            $player->sendMessage("§cYou don't have enough money! You need $" . ($totalCost - $money) . " more.");
+            return;
+        }
+
+        $item->setCount($amount);
+        if(!$player->getInventory()->canAddItem($item)) {
+            $player->sendMessage("§cYour inventory is full!");
+            return;
+        }
+
+        $this->economyAPI->reduceMoney($player, $totalCost);
+        $player->getInventory()->addItem($item);
+        $player->sendMessage("§aPurchased " . $amount . " " . $item->getName() . " for $" . $totalCost . "!");
+    },
+    function(Player $player) use ($category) : void {
+        $this->openCategoryMenu($player, $category);
+    }
+ );
 
     $player->sendForm($form);
     }
