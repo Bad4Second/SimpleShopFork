@@ -26,15 +26,17 @@ class Main extends PluginBase {
     private $config;
 
     public function onEnable(): void {
-        $this->saveResource("shops.yml");
-        $this->config = new Config($this->getDataFolder() . "shops.yml", Config::YAML);
-        $this->shops = $this->config->getAll();
+    $this->saveResource("shops.yml");
+    $this->config = new Config($this->getDataFolder() . "shops.yml", Config::YAML);
+    $this->shops = $this->config->getAll();
+
+    if (class_exists('onebone\economyapi\EconomyAPI')) {
         $this->economyAPI = EconomyAPI::getInstance();
-        
-        if($this->economyAPI === null) {
-            $this->getLogger()->error("EconomyAPI not found. Disabling plugin...");
-            $this->getServer()->getPluginManager()->disablePlugin($this);
-        }
+    } else {
+        $this->getLogger()->error("EconomyAPI class not found. Disabling plugin...");
+        $this->getServer()->getPluginManager()->disablePlugin($this);
+        return; // Exit the method if the class is not found
+    }
     }
 
     public function onCommand(CommandSender $sender, Command $cmd, string $label, array $args): bool {
